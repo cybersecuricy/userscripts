@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Custom Jira Userscript
 // @namespace    http://darkpanda.ca/
-// @version      0.1
+// @version      0.2
 // @description  Custom Jira extensions
 // @author       J Smith <dark.panda@gmail.com>
 // @match        https://*.atlassian.net/*
@@ -63,6 +63,11 @@
         'end-user': {
           'background-color': '#f9d0c4',
           'color': '#333333'
+        },
+
+        'needs-specs': {
+          'background-color': '#fb0400',
+          'color': 'white'
         }
       };
 

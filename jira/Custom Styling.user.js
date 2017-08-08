@@ -12,10 +12,11 @@
   'use strict';
 
   function colorizeCards() {
-    $('.ghx-issue:not(.customJiraStyling').each(function () {
+    $('.ghx-backlog-card, .ghx-issue').not('.customJiraStyling').each(function () {
       var $this = $(this),
         grabberColor = $this.find('.ghx-grabber').css('background-color'),
-        rgbValues = grabberColor.match(/(\d+)/g);
+        rgbValues = grabberColor.match(/(\d+)/g),
+        rgbaText;
 
       $this.addClass('customJiraStyling');
 
@@ -24,8 +25,10 @@
       }
 
       rgbValues.push(0.2);
+      rgbaText = 'rgba(' + rgbValues.join(', ') + ')';
 
-      $this.css('background-color', 'rgba(' + rgbValues.join(', ') + ')');
+      $this.css('background-color', rgbaText);
+      $this.find('.ghx-end').css('background', 'none');
     });
   }
 

@@ -26,10 +26,17 @@
 
   document.querySelectorAll('.milestone-link').forEach((milestoneLink) => {
     let text = milestoneLink.attributes['aria-label'].textContent,
-      color;
+      color,
+      code;
 
     if (!usedColors[text]) {
-      usedColors[text] = colors.pop();
+      code = Array.from(text)
+        .map((char) => char.charCodeAt(0))
+        .reduce((memo, v) => memo + v)
+          % colors.length;
+
+      usedColors[text] = colors[code];
+      colors.splice(code, 1);
     }
 
     color = usedColors[text];

@@ -92,4 +92,24 @@
   }
 
   setInterval(colorizeLabels, 500);
+
+
+  function setColumnsHeight() {
+    var columnsHeight = $(window).height() -
+      $('.ghx-swimlane.ghx-first').height() -
+      $('#ghx-column-header-group').height() -
+      $('#ghx-operations').height();
+
+    $('.ghx-swimlane-header').each((i, e) => {
+      columnsHeight -= $(e).height();
+    });
+
+    $('.ghx-columns:not(:first)').css({ 'height': `${columnsHeight}px` });
+    $('.ghx-columns:not(:first) .ghx-wrap-issue').css({
+      'height': '100%',
+      'overflow-y': 'scroll'
+    });
+  }
+
+  setInterval(setColumnsHeight, 500);
 })();

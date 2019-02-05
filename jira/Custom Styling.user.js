@@ -32,7 +32,7 @@
     });
   }
 
-  setInterval(colorizeCards, 500);
+  setInterval(colorizeCards, 1000);
 
 
   function colorizeLabels() {
@@ -91,7 +91,7 @@
     });
   }
 
-  setInterval(colorizeLabels, 500);
+  setInterval(colorizeLabels, 1000);
 
 
   function setColumnsHeight() {
@@ -111,5 +111,5 @@
     });
   }
 
-  setInterval(setColumnsHeight, 500);
+  setInterval(setColumnsHeight, 1000);
 })();

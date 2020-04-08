@@ -35,8 +35,8 @@
   setInterval(colorizeCards, 1000);
 
 
-  function colorizeLabels() {
-    var DEFAULT_LABEL = {
+  function colorize(type) {
+    var DEFAULT = {
         'font-size': '12px',
         'font-weight': '600',
         'padding': '3px',
@@ -44,34 +44,34 @@
         'margin': '3px'
       },
 
-      LABELS = {
-        'css/html': {
+      COLORS = [
+        {
           'background-color': '#d4c5f9',
           'color': '#333333'
         },
 
-        'admin': {
+        {
           'background-color': '#0052cc',
           'color': 'white'
         },
 
-        'enhancement': {
+        {
           'background-color': '#84b6eb',
           'color': '#333333'
         },
 
-        'end-user': {
+        {
           'background-color': '#f9d0c4',
           'color': '#333333'
         },
 
-        'needs-specs': {
+        {
           'background-color': '#fb0400',
           'color': 'white'
         }
-      };
+      ];
 
-    $('.ghx-extra-field[data-tooltip^="Labels:"] .ghx-extra-field-content:not(.customJiraStyling)').each(function () {
+    $(`.ghx-extra-field[data-tooltip^="${type}:"] .ghx-extra-field-content:not(.customJiraStyling)`).each(function () {
       var $this = $(this),
         labels = $this.text().split(/\s*,\s*/);
 
@@ -80,19 +80,25 @@
       $this.html(_.reduce(labels, function ($memo, label) {
         var $span = $('<span>')
           .text(label)
-          .css(DEFAULT_LABEL);
+          .css(DEFAULT);
 
-        if (LABELS[label]) {
-          $span.css(LABELS[label]);
-        }
+        $span.css(
+          COLORS[
+            label
+              .split('')
+              .map((c) => c.charCodeAt())
+              .reduce((n, m) => n + m)
+                % COLORS.length
+          ]
+        );
 
         return $memo.add($span);
       }, $()));
     });
   }
 
-  setInterval(colorizeLabels, 1000);
-
+  setInterval(function () { colorize('Labels') }, 1000);
+  setInterval(function () { colorize('Components') }, 1000);
 
   function setColumnsHeight() {
     var columnsHeight = $(window).height() -
@@ -112,4 +118,16 @@
   }
 
   setInterval(setColumnsHeight, 1000);
+
+
+  function hideUnusedLabels() {
+    $('[data-tooltip="Labels: None"]').hide();
+  }
+
+  function hideUnusedComponents() {
+    $('[data-tooltip="Components: None"]').hide();
+  }
+
+  setInterval(hideUnusedLabels, 1000);
+  setInterval(hideUnusedComponents, 1000);
 })();

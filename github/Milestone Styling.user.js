@@ -3,7 +3,7 @@
 // @namespace    http://darkpanda.ca/
 // @version      0.1
 // @description  Style milestones so they're easier to read.
-// @author       You
+// @author       J Smith <dark.panda@gmail.com>
 // @match        https://github.com/*/pulls
 // @grant        none
 // ==/UserScript==
